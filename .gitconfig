@@ -1,0 +1,18 @@
+[user]
+	email = nully.nl@gmail.com
+	name = Nully
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+[alias]
+    ci = commit
+    di = diff
+    st = status
+    co = checkout
+[core]
+    excludesfile  = $HOME/.gitignore
+    editor = /usr/bin/vi
+[github]
+    user = nully

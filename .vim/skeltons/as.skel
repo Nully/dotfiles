@@ -1,0 +1,12 @@
+package ;
+
+/**
+ *
+ *
+ */
+class Hoge extends Sprite
+{
+    public void Hoge(String[] args)
+    {
+    }
+}
