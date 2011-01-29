@@ -1,3 +1,3 @@
-[submodule ".vim/runtimes/zencoding-vim"]
-	path = .vim/runtimes/zencoding-vim
+[submodule ".vim/submodules/zencoding-vim"]
+	path = .vim/submodules/zencoding-vim
 	url = git://github.com/mattn/zencoding-vim.git
