@@ -58,6 +58,7 @@ set statusline=%t\ %{&ff.':'.(&fenc==''?&enc:&fenc)}\ [%04v:%04l/%04L]%0(%m%r%)
 " === FileType ================================================================
 syntax on
 set complete+=k
+helptags $HOME/.vim/doc
 
 
 " === Cursors =================================================================
@@ -66,7 +67,7 @@ hi CursorLine guifg=NONE guibg=#333333 gui=underline
 hi Cursorline ctermbg=NONE guibg=#193e51 gui=underline
 
 
-" Skeltons ====================================================================
+" === Skeltons ================================================================
 augroup SkeltonAu
     autocmd!
     autocmd BufNewFile *.html 0r $HOME/.vim/skeltons/html.skel
@@ -77,6 +78,11 @@ augroup SkeltonAu
 augroup END
 
 
+" === OmniFuncs ==============================================================
+augroup OmniFnAu
+    autocmd!
+    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+augroup END
 
 
 
