@@ -58,7 +58,7 @@ set statusline=%t\ %{&ff.':'.(&fenc==''?&enc:&fenc)}\ [%04v:%04l/%04L]%0(%m%r%)
 " === FileType ================================================================
 syntax on
 set complete+=k
-helptags $HOME/.vim/doc
+" helptags $HOME/.vim/doc
 
 
 " === Cursors =================================================================
