@@ -1,6 +1,3 @@
-[submodule ".vim/submodules/zencoding-vim"]
-	path = .vim/submodules/zencoding-vim
-	url = git://github.com/mattn/zencoding-vim.git
 [submodule ".vim/colors"]
 	path = .vim/colors
 	url = git@github.com:nanotech/jellybeans.vim.git
