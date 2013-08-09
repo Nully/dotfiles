@@ -47,6 +47,7 @@ set title
 set noruler
 set nolist
 set wrap
+colorscheme jellybeans
 
 
 " === Status ==================================================================
@@ -85,4 +86,5 @@ augroup OmniFnAu
 augroup END
 
 
-
+" === Bundles ================================================================
+call pathogen#infect()
