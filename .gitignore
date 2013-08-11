@@ -2,3 +2,4 @@
 .svn
 .thumbdb
 
+.vim/autoload/pathogen.vim
