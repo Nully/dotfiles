@@ -55,33 +55,29 @@ set laststatus=2
 set statusline=%t\ %{&ff.':'.(&fenc==''?&enc:&fenc)}\ [%04v:%04l/%04L]%0(%m%r%)
 
 " === Bundles =================================================================
-set rtp+=~/.vim/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'itchyny/lightline.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'itchyny/lightline.vim'
 
-Bundle 'mattn/emmet-vim'
-Bundle 'html5.vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'JulesWang/css.vim'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'groenewege/vim-less'
+Plugin 'mattn/emmet-vim'
+Plugin 'html5.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'JulesWang/css.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'groenewege/vim-less'
 
-"Bundle 'L9'
-"Bundle 'vim-scripts/FuzzyFinder'
-Bundle 'scrooloose/nerdtree'
-Bundle 'autoclose'
+Plugin 'scrooloose/nerdtree'
 
-Bundle 'php.vim'
-Bundle 'ruby.vim'
-Bundle 'rails.vim'
-Bundle 'less-syntax'
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'php.vim'
+Plugin 'ruby.vim'
+Plugin 'rails.vim'
+Plugin 'less-syntax'
+Plugin 'kchmck/vim-coffee-script'
 
-Bundle 'Shougo/neocomplete'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
+call vundle#end()
+filetype plugin indent on
 
 " === FileType ================================================================
 syntax on
