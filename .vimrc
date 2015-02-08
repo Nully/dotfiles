@@ -65,6 +65,9 @@ call vundle#begin()
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
 
+Plugin 'tpope/vim-endwise'
+Plugin 'vim-scripts/AnsiEsc.vim'
+
 Plugin 'mattn/emmet-vim'
 Plugin 'html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
@@ -72,12 +75,10 @@ Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'groenewege/vim-less'
 
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'php.vim'
-Plugin 'ruby.vim'
-Plugin 'rails.vim'
-Plugin 'less-syntax'
+Plugin 'Shougo/unite.vim'
+Plugin 'basyura/unite-rails'
+Plugin 'Shougo/neocomplcache.vim'
+Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
