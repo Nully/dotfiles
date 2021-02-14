@@ -1,0 +1,66 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_source = ['/vim-lsp']
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['deoplete-rct', 'nvim-yarp', 'vim-hub-neovim-rpc']
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option({
+  \ 'auto_complete_delay' : 0,
+  \ 'enable_camle_case' : 0,
+  \ 'enable_ignore_case' : 0,
+  \ 'enable_refresh_always': 0,
+  \ 'enable_smart_case' : 1,
+\ })
+
+call deoplete#custom#var('enable_buffer_path', 1)
+call deoplete#custom#var('auto_complete_start_length', 1)
+call deoplete#custom#var('max_list', 100)
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete-rct'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_add = '''
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+if has('conceal')
+  set conceallevel=0 concealcursor=niv
+endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+depends = ['neosnippet.vim']

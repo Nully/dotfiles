@@ -107,12 +107,9 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-
   call dein#load_toml(s:dein_dir . '/darkpower.toml', { 'lazy': 0 })
   call dein#load_toml(s:dein_dir . '/dein.toml', { 'lazy': 0 })
   call dein#load_toml(s:dein_dir . '/lazy.toml', { 'lazy': 1 })
-
-  " call dein#add('vim-scripts/AnsiEsc.vim')
 
   " Required:
   call dein#end()
