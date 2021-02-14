@@ -5,12 +5,14 @@ set colorcolumn=+1
 
 " === Tabs ====================================================================
 set tabstop=4
-set shiftwidth=4
-set softtabstop=0
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 set smartindent
 set smarttab
+autocmd BufNewFile,BufRead * set expandtab
+autocmd BufNewFile,BufRead * retab
 
 
 " === Inputs ==================================================================
@@ -30,6 +32,9 @@ set ambiwidth=double   " カーソルのズレを補正
 " === Commands ================================================================
 set wildmenu
 set wildmode=list:longest
+set belloff=all
+set cursorline
+set nocursorcolumn
 
 
 " === Search ==================================================================
@@ -54,163 +59,72 @@ set nolist
 set wrap
 set number
 
+
 " === Status ==================================================================
 set cmdheight=1
 set laststatus=2
 set statusline=%t\ %{&ff.':'.(&fenc==''?&enc:&fenc)}\ [%04v:%04l/%04L]%0(%m%r%)
+set matchpairs& matchpairs+=<:>
+set showmatch
+set matchtime=3
+
+" FileTypes ===================================================================
+autocmd FileType vue syntax sync fromstart
+autocmd FileType eruby syntax sync fromstart
+autocmd BufNewFile,BufRead *.{html,htm} set filetype=html
+autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
+autocmd BufNewFile,BufRead *.{pug*} set filetype=pug
+autocmd BufRead,BufNewFile *.scss set filetype=sass
+autocmd BufRead,BufNewFile *.json set filetype=json
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.rb set filetype=ruby
+autocmd BufRead,BufNewFile *.slim set filetype=slim
+autocmd BufRead,BufNewFile *.js set filetype=javascript
+autocmd BufRead,BufNewFile jquery.*.js set filetype=javascript syntax=jquery
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
+
 
 " === key map =================================================================
-" let mapleader = "\<Space>"
+let mapleader = "\<Space>"
 
-" === dein Scripts ============================================================
+
+"dein Scripts-----------------------------
+let s:dein_dir = $HOME . '/.vim/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
 if &compatible
-    set nocompatible " Be iMproved
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" Required:
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
 
-    " Let dein manage dein
-    " Required:
-    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#load_toml(s:dein_dir . '/darkpower.toml', { 'lazy': 0 })
+  call dein#load_toml(s:dein_dir . '/dein.toml', { 'lazy': 0 })
+  call dein#load_toml(s:dein_dir . '/lazy.toml', { 'lazy': 1 })
 
-    " Add or remove your plugins here:
-    call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/neosnippet-snippets')
+  " call dein#add('vim-scripts/AnsiEsc.vim')
 
-    " You can specify revision/branch/tag.
-    call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-
-    call dein#add('Shougo/unite.vim')
-    call dein#add('Shougo/neocomplete')
-    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-
-    call dein#add('altercation/vim-colors-solarized')
-    call dein#add('itchyny/lightline.vim')
-    call dein#add('tpope/vim-endwise')
-    call dein#add('vim-scripts/AnsiEsc.vim')
-    call dein#add('mattn/emmet-vim')
-    call dein#add('hail2u/vim-css3-syntax')
-    call dein#add('JulesWang/css.vim')
-    call dein#add('cakebaker/scss-syntax.vim')
-    call dein#add('groenewege/vim-less')
-
-    call dein#add('basyura/unite-rails')
-    call dein#add('tpope/vim-rails')
-    call dein#add('kchmck/vim-coffee-script')
-    call dein#add('scrooloose/syntastic')
-    call dein#add('aereal/vim-colors-japanesque')
-    call dein#add('editorconfig/editorconfig-vim')
-    call dein#add('joonty/vim-phpqa.git')
-    call dein#add('stephpy/vim-php-cs-fixer')
-    call dein#add('jwalton512/vim-blade')
-    call dein#add('m2mdas/phpcomplete-extended')
-    call dein#add('m2mdas/phpcomplete-extended-laravel')
-
-    call dein#add('beanworks/vim-phpfmt')
-
-    " Required:
-    call dein#end()
-    call dein#save_state()
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
 
 " Required:
 filetype plugin indent on
-syntax enable
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
-" === php-qa settings ========================================================
-" CodingStandardの指定
-"let g:phpqa_codesniffer_args = '--standard=psr2'
-" phpmdの保存時自動実行
-let g:phpqa_messdetector_autorun = 1
-" phpcsの保存時自動実行
-let g:phpqa_codesniffer_autorun = 1
-
-
-" ===== php-cs-fixer setting ===================================================
-" If you use php-cs-fixer version 2.x
-let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
-
-
-" === Shougo/NeoComplete settings =============================================
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 1
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-            \ 'default' : '',
-            \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if dein#check_install()
+  call dein#install()
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
+"End dein Scripts-------------------------
